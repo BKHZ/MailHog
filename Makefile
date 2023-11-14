@@ -32,4 +32,11 @@ tag:
 	cd ../smtp; git tag -a -m 'v${VERSION}' v${VERSION} && git push origin v${VERSION}
 	cd ../storage; git tag -a -m 'v${VERSION}' v${VERSION} && git push origin v${VERSION}
 
+build_linux_arm64:
+	GOOS=linux GOARCH=arm64 go build \
+		-mod=readonly \
+		-ldflags "-X main.version=${VERSION}" \
+		-o dist/mailhog-linux-arm64 \
+		.
+
 .PHONY: all combined release fmt release-deps pull tag
